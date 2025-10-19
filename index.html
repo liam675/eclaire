@@ -3,180 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eclaire Particle Animation</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #808080;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .particle-container {
-            position: relative;
-            width: 100%;
-            height: 60%;
-        }
-
-        .particle {
-            position: absolute;
-            width: 1.2px;
-            height: 1.2px;
-            background: #ffffff;
-            border-radius: 50%;
-            opacity: 0;
-            animation: particleMove 5s cubic-bezier(0.22, 0.95, 0.38, 0.98) infinite;
-        }
-
-        .button-container {
-            margin-top: 20px;
-            opacity: 0;
-            animation: fadeInButton 1s ease-out forwards 5s;
-        }
-
-        .get-started-btn {
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            color: #ffffff;
-            background-color: #333;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .get-started-btn:hover {
-            background-color: #555;
-            transform: scale(1.05);
-        }
-
-        @keyframes particleMove {
-            0% {
-                opacity: 0;
-                transform: translate(var(--start-x), var(--start-y)) scale(0);
-            }
-            25% {
-                opacity: 0.8;
-                transform: translate(var(--target-x), var(--target-y)) scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: translate(var(--target-x), var(--target-y)) scale(1);
-            }
-            75% {
-                opacity: 0.8;
-                transform: translate(var(--end-x), var(--end-y)) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--end-x), var(--end-y)) scale(0);
-            }
-        }
-
-        @keyframes fadeInButton {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-        }
-    </style>
+    <title>Eclaire</title>
+    <link rel="icon" href="eclaire.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="particle-container">
-        <canvas id="particleCanvas"></canvas>
-    </div>
-    <div class="button-container">
-        <button class="get-started-btn">Get Started</button>
-    </div>
+    <nav class="navbar">
+        <div class="nav-container">
+            <img src="eclaire.ico" alt="Eclaire Logo" class="nav-logo">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#external" class="nav-link">External</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#script" class="nav-link">Script</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#purchase" class="nav-link">Purchase</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <script>
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * 0.6;
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Eclaire</h1>
+            <p>The most advanced cheat suite for unbeatable performance.</p>
+        </div>
+        <canvas id="particles-canvas"></canvas>
+    </section>
 
-        function createParticlesForText(text, delay = 0) {
-            const tempCanvas = document.createElement('canvas');
-            const tempCtx = tempCanvas.getContext('2d');
-            tempCanvas.width = canvas.width;
-            tempCanvas.height = canvas.height;
+    <section id="external" class="features">
+        <div class="container">
+            <h2>External Version</h2>
+            <p>Experience our crazy ImGui menu packed with powerful features.</p>
+            <ul class="feature-list">
+                <li>Silent Aim</li>
+                <li>Triggerbot</li>
+                <li>Camlock</li>
+                <li>Hitbox Expander</li>
+                <li>And way more!</li>
+            </ul>
+            <button class="buy-btn" data-price="11">Buy External - $11</button>
+        </div>
+    </section>
 
-            tempCtx.fillStyle = '#ffffff';
-            tempCtx.font = 'bold 6rem Arial'; // Increased font size
-            tempCtx.textAlign = 'center';
-            tempCtx.textBaseline = 'middle';
-            tempCtx.fillText(text, canvas.width / 2, canvas.height / 2);
+    <section id="script" class="features">
+        <div class="container">
+            <h2>Script Version</h2>
+            <p>Affordable scripting power with essential cheats.</p>
+            <ul class="feature-list">
+                <li>Fly</li>
+                <li>Speed</li>
+                <li>ESP</li>
+                <li>Camlock</li>
+                <li>Silent Aim</li>
+                <li>And more!</li>
+            </ul>
+            <button class="buy-btn" data-price="5">Buy Script - $5</button>
+        </div>
+    </section>
 
-            const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
-            const particles = [];
-            let particleCount = 0;
-            const maxParticles = 4000; // Reduced for performance
+    <section id="purchase" class="purchase">
+        <div class="container">
+            <h2>Ready to Dominate?</h2>
+            <p>Choose your version and unlock Eclaire today.</p>
+            <div class="price-cards">
+                <div class="price-card">
+                    <h3>Script Version</h3>
+                    <p class="price">$5</p>
+                    <ul>
+                        <li>Fly</li>
+                        <li>Speed</li>
+                        <li>ESP</li>
+                        <li>Camlock</li>
+                        <li>Silent Aim</li>
+                        <li>And more!</li>
+                    </ul>
+                    <button class="buy-btn">Purchase Now</button>
+                </div>
+                <div class="price-card">
+                    <h3>External Version</h3>
+                    <p class="price">$11</p>
+                    <ul>
+                        <li>Crazy ImGui Menu</li>
+                        <li>Silent Aim</li>
+                        <li>Triggerbot</li>
+                        <li>Camlock</li>
+                        <li>Hitbox Expander</li>
+                        <li>Way more!</li>
+                    </ul>
+                    <button class="buy-btn">Purchase Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            for (let y = 0; y < imageData.height && particleCount < maxParticles; y += 1.5) {
-                for (let x = 0; x < imageData.width && particleCount < maxParticles; x += 1.5) {
-                    const i = (y * imageData.width + x) * 4;
-                    if (imageData.data[i + 3] > 128) {
-                        const particle = document.createElement('div');
-                        particle.className = 'particle';
-                        
-                        const startX = Math.random() * canvas.width;
-                        const startY = Math.random() * canvas.height;
-                        const targetX = x;
-                        const targetY = y;
-                        const endX = Math.random() * canvas.width;
-                        const endY = Math.random() * canvas.height;
-                        
-                        particle.style.setProperty('--start-x', `${startX}px`);
-                        particle.style.setProperty('--start-y', `${startY}px`);
-                        particle.style.setProperty('--target-x', `${targetX}px`);
-                        particle.style.setProperty('--target-y', `${targetY}px`);
-                        particle.style.setProperty('--end-x', `${endX}px`);
-                        particle.style.setProperty('--end-y', `${endY}px`);
-                        
-                        particle.style.animationDelay = `${delay + Math.random() * 0.15}s`;
-                        document.querySelector('.particle-container').appendChild(particle);
-                        
-                        particleCount++;
-                        setTimeout(() => {
-                            particle.remove();
-                        }, (5000 + delay * 1000));
-                    }
-                }
-            }
-        }
-
-        function loopAnimation() {
-            createParticlesForText('Eclaire', 0);
-            createParticlesForText('Come Tap Now', 2.5);
-            setTimeout(loopAnimation, 5000);
-        }
-
-        loopAnimation();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight * 0.6;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
