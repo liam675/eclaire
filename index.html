@@ -1,1 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eclaire Particle Animation</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #808080;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
 
+        .particle-container {
+            position: relative;
+            width: 100%;
+            height: 60%;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleMove 6s cubic-bezier(0.22, 0.95, 0.38, 0.98) infinite;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInButton 1s ease-out forwards 5s;
+        }
+
+        .get-started-btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #ffffff;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .get-started-btn:hover {
+            background-color: #555;
+            transform: scale(1.05);
+        }
+
+        @keyframes particleMove {
+            0% {
+                opacity: 0;
+                transform: translate(var(--start-x), var(--start-y)) scale(0);
+stat: 0.2s;
+            }
+            10% {
+                opacity: 0.2;
+                transform: translate(var(--start-x), var(--start-y)) scale(0.4);
+            }
+            20% {
+                opacity: 0.4;
+                transform: translate(var(--mid-x), var(--mid-y)) scale(0.7);
+            }
+            30% {
+                opacity: 0.7;
+                transform: translate(var(--target-x), var(--target-y)) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(var(--target-x), var(--target-y)) scale(1);
+            }
+            70% {
+                opacity: 1;
+                transform: translate(var(--target-x), var(--target-y)) scale(1);
+            }
+            80% {
+                opacity: 0.7;
+                transform: translate(var(--mid-x), var(--mid-y)) scale(0.7);
+            }
+            90% {
+                opacity: 0.4;
+                transform: translate(var(--end-x), var(--end-y)) scale(0.4);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--end-x), var(--end-y)) scale(0);
+            }
+        }
+
+        @keyframes fadeInButton {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="particle-container">
+        <canvas id="particleCanvas"></canvas>
+    </div>
+    <div class="button-container">
+        <button class="get-started-btn">Get Started</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight * 0.6;
+
+        function createParticlesForText(text, delay = 0) {
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+
+            tempCtx.fillStyle = '#ffffff';
+            tempCtx.font = 'bold 5rem Arial'; // Increased font size
+            tempCtx.textAlign = 'center';
+            tempCtx.textBaseline = 'middle';
+            tempCtx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+            const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+            const particles = [];
+
+            for (let y = 0; y < imageData.height; y += 1) { // Increased density
+                for (let x = 0; x < imageData.width; x += 1) {
+                    const i = (y * imageData.width + x) * 4;
+                    if (imageData.data[i + 3] > 128) {
+                        const particle = document.createElement('div');
+                        particle.className = 'particle';
+                        
+                        const startX = Math.random() * canvas.width;
+                        const startY = Math.random() * canvas.height;
+                        const targetX = x;
+                        const targetY = y;
+                        const endX = Math.random() * canvas.width;
+                        const endY = Math.random() * canvas.height;
+                        
+                        particle.style.setProperty('--start-x', `${startX}px`);
+                        particle.style.setProperty('--start-y', `${startY}px`);
+                        particle.style.setProperty('--mid-x', `${(startX + targetX) / 2}px`);
+                        particle.style.setProperty('--mid-y', `${(startY + targetY) / 2}px`);
+                        particle.style.setProperty('--target-x', `${targetX}px`);
+                        particle.style.setProperty('--target-y', `${targetY}px`);
+                        particle.style.setProperty('--end-x', `${endX}px`);
+                        particle.style.setProperty('--end-y', `${endY}px`);
+                        
+                        particle.style.animationDelay = `${delay + Math.random() * 0.2}s`;
+                        document.querySelector('.particle-container').appendChild(particle);
+                        
+                        setTimeout(() => {
+                            particle.remove();
+                        }, (6000 + delay * 1000));
+                    }
+                }
+            }
+        }
+
+        function loopAnimation() {
+            createParticlesForText('Eclaire', 0);
+            createParticlesForText('Come Tap Now', 3);
+            setTimeout(loopAnimation, 6000);
+        }
+
+        loopAnimation();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight * 0.6;
+        });
+    </script>
+</body>
+</html>
