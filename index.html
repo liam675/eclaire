@@ -23,21 +23,14 @@
             height: 60%;
         }
 
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
         .particle {
             position: absolute;
-            width: 1px;
-            height: 1px;
+            width: 1.2px;
+            height: 1.2px;
             background: #ffffff;
             border-radius: 50%;
             opacity: 0;
-            animation: particleMove 6s cubic-bezier(0.22, 0.95, 0.38, 0.98) infinite;
+            animation: particleMove 5s cubic-bezier(0.22, 0.95, 0.38, 0.98) infinite;
         }
 
         .button-container {
@@ -68,35 +61,18 @@
             0% {
                 opacity: 0;
                 transform: translate(var(--start-x), var(--start-y)) scale(0);
-stat: 0.2s;
             }
-            10% {
-                opacity: 0.2;
-                transform: translate(var(--start-x), var(--start-y)) scale(0.4);
-            }
-            20% {
-                opacity: 0.4;
-                transform: translate(var(--mid-x), var(--mid-y)) scale(0.7);
-            }
-            30% {
-                opacity: 0.7;
+            25% {
+                opacity: 0.8;
                 transform: translate(var(--target-x), var(--target-y)) scale(1);
             }
             50% {
                 opacity: 1;
                 transform: translate(var(--target-x), var(--target-y)) scale(1);
             }
-            70% {
-                opacity: 1;
-                transform: translate(var(--target-x), var(--target-y)) scale(1);
-            }
-            80% {
-                opacity: 0.7;
-                transform: translate(var(--mid-x), var(--mid-y)) scale(0.7);
-            }
-            90% {
-                opacity: 0.4;
-                transform: translate(var(--end-x), var(--end-y)) scale(0.4);
+            75% {
+                opacity: 0.8;
+                transform: translate(var(--end-x), var(--end-y)) scale(1);
             }
             100% {
                 opacity: 0;
@@ -146,16 +122,18 @@ stat: 0.2s;
             tempCanvas.height = canvas.height;
 
             tempCtx.fillStyle = '#ffffff';
-            tempCtx.font = 'bold 5rem Arial'; // Increased font size
+            tempCtx.font = 'bold 6rem Arial'; // Increased font size
             tempCtx.textAlign = 'center';
             tempCtx.textBaseline = 'middle';
             tempCtx.fillText(text, canvas.width / 2, canvas.height / 2);
 
             const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
             const particles = [];
+            let particleCount = 0;
+            const maxParticles = 4000; // Reduced for performance
 
-            for (let y = 0; y < imageData.height; y += 1) { // Increased density
-                for (let x = 0; x < imageData.width; x += 1) {
+            for (let y = 0; y < imageData.height && particleCount < maxParticles; y += 1.5) {
+                for (let x = 0; x < imageData.width && particleCount < maxParticles; x += 1.5) {
                     const i = (y * imageData.width + x) * 4;
                     if (imageData.data[i + 3] > 128) {
                         const particle = document.createElement('div');
@@ -170,19 +148,18 @@ stat: 0.2s;
                         
                         particle.style.setProperty('--start-x', `${startX}px`);
                         particle.style.setProperty('--start-y', `${startY}px`);
-                        particle.style.setProperty('--mid-x', `${(startX + targetX) / 2}px`);
-                        particle.style.setProperty('--mid-y', `${(startY + targetY) / 2}px`);
                         particle.style.setProperty('--target-x', `${targetX}px`);
                         particle.style.setProperty('--target-y', `${targetY}px`);
                         particle.style.setProperty('--end-x', `${endX}px`);
                         particle.style.setProperty('--end-y', `${endY}px`);
                         
-                        particle.style.animationDelay = `${delay + Math.random() * 0.2}s`;
+                        particle.style.animationDelay = `${delay + Math.random() * 0.15}s`;
                         document.querySelector('.particle-container').appendChild(particle);
                         
+                        particleCount++;
                         setTimeout(() => {
                             particle.remove();
-                        }, (6000 + delay * 1000));
+                        }, (5000 + delay * 1000));
                     }
                 }
             }
@@ -190,8 +167,8 @@ stat: 0.2s;
 
         function loopAnimation() {
             createParticlesForText('Eclaire', 0);
-            createParticlesForText('Come Tap Now', 3);
-            setTimeout(loopAnimation, 6000);
+            createParticlesForText('Come Tap Now', 2.5);
+            setTimeout(loopAnimation, 5000);
         }
 
         loopAnimation();
