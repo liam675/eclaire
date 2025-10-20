@@ -5,8 +5,8 @@ class Particle {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 3 - 1.5; // Faster speed
-        this.speedY = Math.random() * 3 - 1.5; // Faster speed
+        this.speedX = Math.random() * 3 - 1.5;
+        this.speedY = Math.random() * 3 - 1.5;
         this.color = '#0074D9';
     }
 
@@ -17,7 +17,7 @@ class Particle {
         if (this.x > this.canvas.width || this.x < 0) this.speedX *= -1;
         if (this.y > this.canvas.height || this.y < 0) this.speedY *= -1;
 
-        this.size += Math.sin(Date.now() / 200) * 0.01; // Pulsing effect
+        this.size += Math.sin(Date.now() / 200) * 0.01;
     }
 
     draw() {
@@ -45,8 +45,7 @@ for (let i = 0; i < 150; i++) {
 }
 
 function animate() {
-    ctx.fillStyle = 'rgba(0, 31, 63, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas, no background fill
 
     particles.forEach(p => {
         p.update();
