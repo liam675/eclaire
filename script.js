@@ -67,10 +67,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Buy button click simulation
+// Buy button redirect
 document.querySelectorAll('.buy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        alert(`Purchasing ${btn.textContent} for $${btn.dataset.price}! Redirecting... (Demo)`);
+        window.location.href = 'https://discord.gg/eclaire';
     });
 });
 
@@ -105,3 +105,12 @@ document.addEventListener('mouseup', () => {
 });
 
 updateCursor();
+
+// Notification on page load
+window.addEventListener('load', () => {
+    const notification = document.getElementById('welcome-notification');
+    notification.classList.add('show');
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 5000);
+});
