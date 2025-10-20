@@ -1,40 +1,38 @@
-/* style.css */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Courier New', monospace;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    overflow-x: hidden;
-    background: #0a0a0a;
+    background: #000;
     color: #fff;
+    overflow-x: hidden;
 }
 
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    background: linear-gradient(135deg, #001f3f 0%, #0074D9 100%);
+    background: linear-gradient(135deg, #ff00ff, #00f0ff);
+    padding: 1rem;
     z-index: 1000;
-    padding: 1rem 0;
-    box-shadow: 0 2px 10px rgba(0, 116, 217, 0.3);
+    border-bottom: 2px solid #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    justify-content: space-between;
 }
 
 .nav-logo {
-    height: 40px;
-    width: auto;
-    filter: brightness(1.2);
+    height: 35px;
+    filter: drop-shadow(0 0 5px #00f0ff);
 }
 
 .nav-menu {
@@ -43,29 +41,30 @@ body {
 }
 
 .nav-item {
-    margin-left: 2rem;
+    margin-left: 1.5rem;
 }
 
 .nav-link {
     color: #fff;
     text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    font-size: 1.1rem;
     position: relative;
+    transition: color 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #FFD700;
+    color: #00f0ff;
+    text-shadow: 0 0 10px #00f0ff;
 }
 
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -5px;
+    bottom: -3px;
     left: 0;
     width: 0;
     height: 2px;
-    background: #FFD700;
+    background: #ff00ff;
     transition: width 0.3s ease;
 }
 
@@ -73,14 +72,13 @@ body {
     width: 100%;
 }
 
-/* Hero Section */
 .hero {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background: radial-gradient(ellipse at bottom, #1B1B2F 0%, #0a0a0a 100%);
+    background: #000;
 }
 
 .hero-content {
@@ -89,22 +87,18 @@ body {
 }
 
 .hero h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, #0074D9, #FFD700);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: glow 2s ease-in-out infinite alternate;
 }
 
-@keyframes glow {
-    from { text-shadow: 0 0 5px #0074D9; }
-    to { text-shadow: 0 0 20px #0074D9, 0 0 30px #0074D9; }
+.highlight {
+    color: #00f0ff;
+    text-shadow: 0 0 10px #00f0ff;
 }
 
 .hero p {
-    font-size: 1.5rem;
-    opacity: 0.8;
+    font-size: 1.3rem;
+    opacity: 0.9;
 }
 
 #particles-canvas {
@@ -116,62 +110,59 @@ body {
     z-index: 1;
 }
 
-/* Features Sections */
 .features {
-    padding: 5rem 0;
+    padding: 4rem 0;
     background: #111;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 0 2rem;
     text-align: center;
 }
 
 .features h2 {
-    font-size: 3rem;
+    font-size: 2.5rem;
+    color: #ff00ff;
     margin-bottom: 1rem;
-    color: #0074D9;
+    text-shadow: 0 0 8px #ff00ff;
 }
 
 .features p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
 }
 
 .feature-list {
     list-style: none;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .feature-list li {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
+    font-size: 1rem;
     padding: 0.5rem;
-    background: rgba(0, 116, 217, 0.1);
-    border-radius: 5px;
-    transition: background 0.3s ease;
+    background: rgba(0, 240, 255, 0.1);
+    margin: 0.3rem 0;
+    border-left: 4px solid #00f0ff;
+    transition: transform 0.3s ease;
 }
 
 .feature-list li:hover {
-    background: rgba(0, 116, 217, 0.2);
+    transform: translateX(10px);
 }
 
-/* Buttons */
 .buy-btn {
-    background: linear-gradient(45deg, #0074D9, #001f3f);
-    color: #fff;
+    background: linear-gradient(45deg, #ff00ff, #00f0ff);
+    color: #000;
     border: none;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    border-radius: 50px;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 116, 217, 0.3);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
 }
 
 .buy-btn::before {
@@ -181,8 +172,8 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.4s ease;
 }
 
 .buy-btn:hover::before {
@@ -190,80 +181,67 @@ body {
 }
 
 .buy-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 116, 217, 0.5);
-    background: linear-gradient(45deg, #001f3f, #0074D9);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+    text-shadow: 0 0 5px #000;
 }
 
-.buy-btn:active {
-    transform: translateY(-1px) scale(1.02);
-}
-
-/* Purchase Section */
 .purchase {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, #001f3f 0%, #0074D9 100%);
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #ff00ff, #00f0ff);
 }
 
 .price-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
     margin-top: 2rem;
 }
 
 .price-card {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #00f0ff;
     transition: transform 0.3s ease;
 }
 
 .price-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
 }
 
 .price-card h3 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #FFD700;
+    font-size: 1.8rem;
+    color: #00f0ff;
 }
 
 .price {
-    font-size: 3rem;
-    color: #0074D9;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    color: #ff00ff;
+    margin: 0.5rem 0;
 }
 
 .price-card ul {
     list-style: none;
-    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
 }
 
 .price-card li {
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    margin: 0.3rem 0;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
     .nav-menu {
         flex-direction: column;
+        align-items: flex-end;
     }
 
     .nav-item {
         margin: 0.5rem 0;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .price-cards {
-        grid-template-columns: 1fr;
     }
 }
