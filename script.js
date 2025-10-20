@@ -45,7 +45,7 @@ for (let i = 0; i < 150; i++) {
 }
 
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas, no background fill
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     particles.forEach(p => {
         p.update();
