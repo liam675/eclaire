@@ -6,7 +6,7 @@
 }
 
 body {
-    background: #000;
+    background: linear-gradient(180deg, #001f3f, #0074D9);
     color: #fff;
     overflow-x: hidden;
 }
@@ -15,11 +15,11 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: linear-gradient(135deg, #ff00ff, #00f0ff);
+    background: linear-gradient(135deg, #001f3f, #0074D9);
     padding: 1rem;
     z-index: 1000;
-    border-bottom: 2px solid #00f0ff;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    border-bottom: 2px solid #0074D9;
+    box-shadow: 0 0 15px rgba(0, 116, 217, 0.5);
 }
 
 .nav-container {
@@ -31,8 +31,9 @@ body {
 }
 
 .nav-logo {
-    height: 35px;
-    filter: drop-shadow(0 0 5px #00f0ff);
+    height: 40px;
+    margin-left: 0;
+    filter: drop-shadow(0 0 5px #0074D9);
 }
 
 .nav-menu {
@@ -49,12 +50,11 @@ body {
     text-decoration: none;
     font-size: 1.1rem;
     position: relative;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-    color: #00f0ff;
-    text-shadow: 0 0 10px #00f0ff;
+    text-shadow: 0 0 10px #0074D9;
 }
 
 .nav-link::after {
@@ -64,7 +64,7 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: #ff00ff;
+    background: #0074D9;
     transition: width 0.3s ease;
 }
 
@@ -78,7 +78,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    background: #000;
+    background: transparent;
 }
 
 .hero-content {
@@ -86,19 +86,16 @@ body {
     z-index: 2;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-}
-
-.highlight {
-    color: #00f0ff;
-    text-shadow: 0 0 10px #00f0ff;
+.main-logo {
+    height: 200px;
+    filter: drop-shadow(0 0 10px #0074D9);
 }
 
 .hero p {
-    font-size: 1.3rem;
-    opacity: 0.9;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-shadow: 0 0 10px #0074D9;
 }
 
 #particles-canvas {
@@ -108,29 +105,40 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
+    opacity: 0.8;
 }
 
 .features {
     padding: 4rem 0;
-    background: #111;
 }
 
 .container {
     max-width: 1000px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.feature-box {
+    background: rgba(0, 31, 63, 0.7);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 1px solid #0074D9;
     text-align: center;
+    transition: transform 0.3s ease;
 }
 
-.features h2 {
-    font-size: 2.5rem;
-    color: #ff00ff;
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(0, 116, 217, 0.5);
+}
+
+.feature-box h2 {
+    font-size: 2rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 8px #ff00ff;
-}
-
-.features p {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+    color: #0074D9;
+    text-shadow: 0 0 5px #0074D9;
 }
 
 .feature-list {
@@ -141,19 +149,14 @@ body {
 .feature-list li {
     font-size: 1rem;
     padding: 0.5rem;
-    background: rgba(0, 240, 255, 0.1);
     margin: 0.3rem 0;
-    border-left: 4px solid #00f0ff;
-    transition: transform 0.3s ease;
-}
-
-.feature-list li:hover {
-    transform: translateX(10px);
+    border-left: 4px solid #0074D9;
+    background: rgba(0, 116, 217, 0.1);
 }
 
 .buy-btn {
-    background: linear-gradient(45deg, #ff00ff, #00f0ff);
-    color: #000;
+    background: linear-gradient(45deg, #001f3f, #0074D9);
+    color: #fff;
     border: none;
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
@@ -162,7 +165,7 @@ body {
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 116, 217, 0.5);
 }
 
 .buy-btn::before {
@@ -182,58 +185,16 @@ body {
 
 .buy-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
-    text-shadow: 0 0 5px #000;
-}
-
-.purchase {
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #ff00ff, #00f0ff);
-}
-
-.price-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.price-card {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 1.5rem;
-    border-radius: 10px;
-    border: 1px solid #00f0ff;
-    transition: transform 0.3s ease;
-}
-
-.price-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
-}
-
-.price-card h3 {
-    font-size: 1.8rem;
-    color: #00f0ff;
-}
-
-.price {
-    font-size: 2.5rem;
-    color: #ff00ff;
-    margin: 0.5rem 0;
-}
-
-.price-card ul {
-    list-style: none;
-    font-size: 0.9rem;
-}
-
-.price-card li {
-    margin: 0.3rem 0;
+    box-shadow: 0 0 20px rgba(0, 116, 217, 0.7);
 }
 
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2rem;
+    .hero p {
+        font-size: 1.5rem;
+    }
+
+    .main-logo {
+        height: 150px;
     }
 
     .nav-menu {
