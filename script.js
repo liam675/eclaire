@@ -5,9 +5,9 @@ class Particle {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
-        this.color = `hsl(${Math.random() * 60 + 180}, 80%, 60%)`;
+        this.speedX = Math.random() * 0.3 - 0.15;
+        this.speedY = Math.random() * 0.3 - 0.15;
+        this.color = '#0074D9';
     }
 
     update() {
@@ -19,10 +19,10 @@ class Particle {
 
     draw() {
         this.ctx.strokeStyle = this.color;
-        this.ctx.lineWidth = 2;
+        this.ctx.lineWidth = 1;
         this.ctx.beginPath();
         this.ctx.moveTo(this.x, this.y);
-        this.ctx.lineTo(this.x - this.speedX * 10, this.y - this.speedY * 10);
+        this.ctx.lineTo(this.x - this.speedX * 15, this.y - this.speedY * 15);
         this.ctx.stroke();
         this.ctx.beginPath();
         this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -43,12 +43,12 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 const particles = [];
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 60; i++) {
     particles.push(new Particle(canvas));
 }
 
 function animate() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.fillStyle = 'rgba(0, 31, 63, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
         p.update();
@@ -70,6 +70,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 document.querySelectorAll('.buy-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        alert(`Purchasing ${btn.textContent} for $${btn.dataset.price || '5'}! Redirecting... (Demo)`);
+        alert(`Purchasing ${btn.textContent} for $${btn.dataset.price}! Redirecting... (Demo)`);
     });
 });
