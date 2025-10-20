@@ -1,7 +1,7 @@
 const mediaData = [
-    { id: 'id1', url: 'https://www.youtube.com/watch?v=6jGFVmIZfTY' },
-    { id: 'id2', url: 'https://discord.gg/eclaire' },
-    { id: 'id3', url: 'https://discord.gg/eclaire' }
+    { id: 'id1', url: '' },
+    { id: 'id2', url: '' },
+    { id: 'id3', url: '' }
     // Add more media entries here with id and YouTube embed URL
 ];
 
