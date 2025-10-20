@@ -81,7 +81,7 @@ document.body.appendChild(cursor);
 
 let mouseX = 0, mouseY = 0;
 let cursorX = 0, cursorY = 0;
-const delay = 0.1;
+const delay = 0.05;
 
 function updateCursor() {
     cursorX += (mouseX - cursorX) * delay;
