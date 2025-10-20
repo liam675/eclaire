@@ -21,7 +21,7 @@ body {
     background-size: contain;
     pointer-events: none;
     z-index: 9999;
-    transition: transform 0.3s ease, left 0.05s ease, top 0.05s ease;
+    transition: transform 0.3s ease;
 }
 
 .cursor.clicked {
@@ -180,7 +180,7 @@ body {
     border: none;
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
-    border thoughtbot-radius: 5px;
+    border-radius: 15px;
     cursor: none;
     position: relative;
     overflow: hidden;
