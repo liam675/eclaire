@@ -3,12 +3,30 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Courier New', monospace;
+    cursor: none; /* Hide default cursor */
 }
 
 body {
     background: linear-gradient(180deg, #001f3f, #0074D9);
     color: #fff;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Custom Cursor */
+.cursor {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    background: url('cursor.ico') no-repeat center;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.3s ease, left 0.1s ease, top 0.1s ease;
+}
+
+.cursor.clicked {
+    transform: scale(0.8);
 }
 
 .navbar {
@@ -87,8 +105,15 @@ body {
 }
 
 .main-logo {
-    height: 200px;
+    height: 300px;
     filter: drop-shadow(0 0 10px #0074D9);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 .hero p {
@@ -150,8 +175,7 @@ body {
     font-size: 1rem;
     padding: 0.5rem;
     margin: 0.3rem 0;
-    border-left: 4px solid #0074D9;
-    background: rgba(0, 116, 217, 0.1);
+    text-align: left;
 }
 
 .buy-btn {
@@ -161,7 +185,7 @@ body {
     padding: 0.8rem 2rem;
     font-size: 1.1rem;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: none;
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -194,7 +218,7 @@ body {
     }
 
     .main-logo {
-        height: 150px;
+        height: 200px;
     }
 
     .nav-menu {
