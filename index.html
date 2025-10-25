@@ -3,65 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eclaire - The Only External You Will Need</title>
-    <link rel="icon" href="eclaire.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <title>Eclaire</title>
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 2rem;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .panel-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .error {
+            background-color: #ef4444;
+            color: #fff;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .success {
+            background-color: #22c55e;
+            color: #fff;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 2rem;
+        }
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #e0f2fe;
+        }
+        .flex {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .input {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+        .input:focus {
+            outline: none;
+            border-color: #60a5fa;
+        }
+        .button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .button-blue {
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+        }
+        .button-blue:hover {
+            background: linear-gradient(90deg, #1d4ed8, #2563eb);
+            transform: translateY(-2px);
+        }
+        .button-green {
+            background: linear-gradient(90deg, #16a34a, #22c55e);
+        }
+        .button-green:hover {
+            background: linear-gradient(90deg, #15803d, #16a34a);
+            transform: translateY(-2px);
+        }
+        .button-gray {
+            background: linear-gradient(90deg, #4b5563, #6b7280);
+        }
+        .button-gray:hover {
+            background: linear-gradient(90deg, #374151, #4b5563);
+            transform: translateY(-2px);
+        }
+        .button-yellow {
+            background: linear-gradient(90deg, #ca8a04, #f59e0b);
+        }
+        .button-yellow:hover {
+            background: linear-gradient(90deg, #a16207, #ca8a04);
+            transform: translateY(-2px);
+        }
+        .button-red {
+            background: linear-gradient(90deg, #dc2626, #ef4444);
+        }
+        .button-red:hover {
+            background: linear-gradient(90deg, #b91c1c, #dc2626);
+            transform: translateY(-2px);
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+        }
+        .card-text {
+            font-weight: 600;
+            color: #e0f2fe;
+        }
+        .login-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #ffffff;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <img src="eclaire.ico" alt="Eclaire Logo" class="nav-logo">
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
-                <li class="nav-item"><a href="#media" class="nav-link">Media</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <img src="mainlogo.ico" alt="Main Logo" class="main-logo">
-            <p>The Greatest Roblox External</p>
-        </div>
-        <canvas id="particles-canvas"></canvas>
-    </section>
+        function App() {
+            const [isLoggedIn, setIsLoggedIn] = useState(false);
+            const [username, setUsername] = useState('');
+            const [password, setPassword] = useState('');
+            const [keys, setKeys] = useState({});
+            const [newUsername, setNewUsername] = useState('');
+            const [newPassword, setNewPassword] = useState('');
+            const [newHwid, setNewHwid] = useState('');
+            const [editUsername, setEditUsername] = useState('');
+            const [editHwid, setEditHwid] = useState('');
+            const [editingKey, setEditingKey] = useState(null);
+            const [error, setError] = useState('');
+            const [success, setSuccess] = useState('');
 
-    <section id="features" class="features">
-        <div class="container">
-            <div class="feature-box">
-                <h2>Script Version - $5</h2>
-                <ul class="feature-list">
-                    <li>* Fly</li>
-                    <li>* ESP</li>
-                    <li>* Silent Aim</li>
-                </ul>
-                <button class="buy-btn" data-price="5">Buy Now</button>
-            </div>
-            <div class="feature-box">
-                <h2>External Version - $11</h2>
-                <ul class="feature-list">
-                    <li>* ImGui Menu</li>
-                    <li>* Triggerbot</li>
-                    <li>* Hitbox Expander</li>
-                </ul>
-                <button class="buy-btn" data-price="11">Buy Now</button>
-            </div>
-        </div>
-    </section>
+            const GITHUB_PAT = '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';
+            const REPO_OWNER = 'liam675';
+            const REPO_NAME = 'keys.json';
+            const FILE_PATH = 'keys.json';
+            const RAW_URL = 'https://raw.githubusercontent.com/liam675/keys.json/main/keys.json';
 
-    <section id="media" class="media">
-        <div class="container">
-            <h2>Media</h2>
-            <div id="media-container"></div>
-        </div>
-    </section>
+            const handleLogin = async () => {
+                if (username === 'jeff' && password === 'billy') {
+                    setIsLoggedIn(true);
+                    setError('');
+                    setSuccess('Login successful! Welcome BUDSKIS');
+                    fetchKeys();
+                    return;
+                }
 
-    <div class="notification" id="welcome-notification">
-        Cop Eclaire Now!
-    </div>
+                try {
+                    const response = await axios.get(RAW_URL);
+                    const keysData = response.data;
+                    if (keysData[username] && keysData[username].password === password) {
+                        setIsLoggedIn(true);
+                        setError('');
+                        setSuccess('Login successful! Welcome to Eclaire.');
+                        setKeys(keysData);
+                    } else {
+                        setError('Invalid username or password');
+                    }
+                } catch (err) {
+                    setError(`Failed to verify credentials: ${err.message}`);
+                }
+            };
 
-    <script src="script.js"></script>
-    <script src="media.js"></script>
+            const fetchKeys = async () => {
+                try {
+                    const response = await axios.get(RAW_URL);
+                    setKeys(response.data);
+                    setError('');
+                } catch (err) {
+                    setError(`Failed to fetch keys: ${err.message}`);
+                }
+            };
+
+            const updateKeysFile = async (newKeys) => {
+                try {
+                    const getResponse = await axios.get(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+                        headers: {
+                            Authorization: `token ${GITHUB_PAT}`,
+                            Accept: 'application/vnd.github.v3+json'
+                        }
+                    });
+                    const sha = getResponse.data.sha;
+                    const content = btoa(JSON.stringify(newKeys, null, 2));
+                    await axios.put(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`, {
+                        message: `Update keys.json at ${new Date().toISOString()}`,
+                        content: content,
+                        sha: sha
+                    }, {
+                        headers: {
+                            Authorization: `token ${GITHUB_PAT}`,
+                            Accept: 'application/vnd.github.v3+json'
+                        }
+                    });
+                    return true;
+                } catch (err) {
+                    setError(`Failed to update keys: ${err.response?.status} - ${err.response?.data?.message || err.message}`);
+                    return false;
+                }
+            };
+
+            const addKey = async () => {
+                if (!newUsername || !newPassword || !newHwid) {
+                    setError('Enter username, password, and HWID');
+                    return;
+                }
+                const newKeys = { ...keys, [newUsername]: { password: newPassword, hwid: newHwid } };
+                if (await updateKeysFile(newKeys)) {
+                    setKeys(newKeys);
+                    setNewUsername('');
+                    setNewPassword('');
+                    setNewHwid('');
+                    setSuccess('Key added!');
+                    setError('');
+                }
+            };
+
+            const deleteKey = async (username) => {
+                const newKeys = { ...keys };
+                delete newKeys[username];
+                if (await updateKeysFile(newKeys)) {
+                    setKeys(newKeys);
+                    setSuccess('Key deleted!');
+                    setError('');
+                }
+            };
+
+            const startEdit = (username, hwid) => {
+                setEditingKey(username);
+                setEditUsername(username);
+                setEditHwid(hwid);
+            };
+
+            const saveEdit = async () => {
+                if (!editUsername || !editHwid) {
+                    setError('Enter username and HWID');
+                    return;
+                }
+                const newKeys = { ...keys };
+                if (editUsername !== editingKey) {
+                    delete newKeys[editingKey];
+                }
+                newKeys[editUsername] = { ...newKeys[editingKey], hwid: editHwid };
+                if (await updateKeysFile(newKeys)) {
+                    setKeys(newKeys);
+                    setEditingKey(null);
+                    setEditUsername('');
+                    setEditHwid('');
+                    setSuccess('HWID updated!');
+                    setError('');
+                }
+            };
+
+            useEffect(() => {
+                if (success) {
+                    setTimeout(() => setSuccess(''), 3000);
+                }
+            }, [success]);
+
+            if (!isLoggedIn) {
+                return (
+                    <div className="container">
+                        <div className="login-container">
+                            <h1 className="login-title">Eclaire Login</h1>
+                            {error && <div className="error">{error}</div>}
+                            {success && <div className="success">{success}</div>}
+                            <div className="section">
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    className="input"
+                                />
+                            </div>
+                            <div className="section">
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    className="input"
+                                />
+                            </div>
+                            <div className="section">
+                                <button
+                                    onClick={handleLogin}
+                                    className="button button-blue"
+                                    style={{ width: '100%' }}
+                                >
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="container">
+                    <div className="panel-container">
+                        <h1 className="title">Eclaire MANAGER IF YOUR HERE U NEED TO DIE</h1>
+                        {error && <div className="error">{error}</div>}
+                        {success && <div className="success">{success}</div>}
+
+                        <div className="section">
+                            <h2 className="section-title">Add Key</h2>
+                            <div className="flex">
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    value={newUsername}
+                                    onChange={(e) => setNewUsername(e.target.value)}
+                                    className="input"
+                                />
+                                <input
+                                    type="password"
+                                    placeholder="Password"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    className="input"
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="HWID"
+                                    value={newHwid}
+                                    onChange={(e) => setNewHwid(e.target.value)}
+                                    className="input"
+                                />
+                                <button
+                                    onClick={addKey}
+                                    className="button button-blue"
+                                >
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="section">
+                            <h2 className="section-title">Keys</h2>
+                            <div>
+                                {Object.entries(keys).map(([username, data]) => (
+                                    <div key={username} className="card">
+                                        {editingKey === username ? (
+                                            <div className="flex w-full">
+                                                <input
+                                                    type="text"
+                                                    value={editUsername}
+                                                    onChange={(e) => setEditUsername(e.target.value)}
+                                                    className="input"
+                                                />
+                                                <input
+                                                    type="text"
+                                                    value={editHwid}
+                                                    onChange={(e) => setEditHwid(e.target.value)}
+                                                    className="input"
+                                                />
+                                                <div>
+                                                    <button
+                                                        onClick={saveEdit}
+                                                        className="button button-green"
+                                                        style={{ marginRight: '0.5rem' }}
+                                                    >
+                                                        Save
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setEditingKey(null)}
+                                                        className="button button-gray"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <div>
+                                                    <span className="card-text">Username:</span> {username}
+                                                    <br />
+                                                    <span className="card-text">HWID:</span> {data.hwid}
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        onClick={() => startEdit(username, data.hwid)}
+                                                        className="button button-yellow"
+                                                        style={{ marginRight: '0.5rem' }}
+                                                    >
+                                                        Edit HWID
+                                                    </button>
+                                                    <button
+                                                        onClick={() => deleteKey(username)}
+                                                        className="button button-red"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
 </body>
 </html>
